@@ -13,20 +13,34 @@ import {
 class WinstonLogger implements LoggerService {
   constructor(private readonly logger: Logger) {}
 
-  public log(message: any, context?: string) {
-    return this.logger.info({ ...this.prepareMessage(message), context });
+  public log(
+    _className: string,
+    _functionName: string,
+    message: any,
+    context?: string,
+  ) {
+    return this.logger.info({
+      _className,
+      _functionName,
+      ...this.prepareMessage(message),
+      context,
+    });
   }
   public error(message: any, trace?: string, context?: string) {
-    return this.logger.error({...this.prepareMessage(message), trace, context });
+    return this.logger.error({
+      ...this.prepareMessage(message),
+      trace,
+      context,
+    });
   }
   public warn(message: any, context?: string) {
-    return this.logger.warn({...this.prepareMessage(message), context });
+    return this.logger.warn({ ...this.prepareMessage(message), context });
   }
   public debug?(message: any, context?: string) {
-    return this.logger.debug({...this.prepareMessage(message), context });
+    return this.logger.debug({ ...this.prepareMessage(message), context });
   }
   public verbose?(message: any, context?: string) {
-    return this.logger.verbose({...this.prepareMessage(message), context });
+    return this.logger.verbose({ ...this.prepareMessage(message), context });
   }
 
   private prepareMessage(message: any): object {
@@ -38,7 +52,8 @@ class WinstonLogger implements LoggerService {
 }
 
 export function createWinstonProviders(
-  loggerOpts: WinstonModuleOptions): Provider[] {
+  loggerOpts: WinstonModuleOptions,
+): Provider[] {
   return [
     {
       provide: WINSTON_MODULE_PROVIDER,
@@ -55,7 +70,8 @@ export function createWinstonProviders(
 }
 
 export function createWinstonAsyncProviders(
-  options: WinstonModuleAsyncOptions): Provider[] {
+  options: WinstonModuleAsyncOptions,
+): Provider[] {
   return [
     {
       provide: WINSTON_MODULE_OPTIONS,
