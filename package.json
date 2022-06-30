@@ -1,9 +1,9 @@
 {
-  "name": "mylogger",
+  "name": "my-winston-logger2",
   "version": "0.0.3",
   "description": "",
   "author": "",
-  "private": true,
+  "private": false,
   "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
